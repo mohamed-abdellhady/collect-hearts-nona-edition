@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffe0ec">
+    <meta name="description" content="A little heart-catching game made with love for hana.">
+    <title>For nona 💗 | Collect the Hearts</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <main class="app">
+        <div class="decor decor-one">♡</div>
+        <div class="decor decor-two">✦</div>
+        <div class="decor decor-three">♡</div>
+
+        <header class="top">
+            <span class="brand-heart">♥</span>
+            <span>let's play little girl</span>
+            <span class="brand-heart">♥</span>
+        </header>
+
+        <!-- HOME SCREEN -->
+        <section id="startScreen" class="screen start-screen">
+            <div class="hero-heart">💗</div>
+
+            <p class="eyebrow">A LITTLE GAME FOR</p>
+            <h1>nona<span>♡</span></h1>
+
+            <p class="description">
+                Catch the hearts, avoid the bombs
+                <br>
+                and see how far you can go!
+            </p>
+
+            <div class="instructions">
+                <span>💖 Catch hearts</span>
+                <span>💣 Avoid bombs</span>
+            </div>
+
+            <div class="best-score">
+                <span>YOUR BEST SCORE</span>
+                <strong id="bestScore">0</strong>
+            </div>
+
+            <button id="playButton" class="main-button">
+                PLAY little girl ♥
+            </button>
+
+            <p class="tiny-note">A tiny game made just for you 🥰</p>
+        </section>
+
+        <!-- GAME SCREEN -->
+        <section id="gameScreen" class="screen game-screen" hidden>
+            <div class="game-heading">
+                <div>
+                    <p class="eyebrow">CATCH THE heart's</p>
+                    <h2>Let's play, nona!</h2>
+                </div>
+
+                <div class="lives" id="lives" aria-label="3 lives">
+                    ❤️❤️❤️
+                </div>
+            </div>
+            </div>
+
+            <div class="stats">
+                <div class="stat">
+                    <span>YOUR SCORE</span>
+                    <strong id="score">0</strong>
+                </div>
+
+
+                <div class="stat">
+                    <span>level</span>
+                    <strong id="level">1</strong>
+                </div>
+
+                <div class="stat">
+                    <span>timer</span>
+                    <strong id="timer">00:00</strong>
+                </div>
+
+                <div class="stat">
+                    <span>YOUR BEST</span>
+                    <strong id="gameBest">0</strong>
+                </div>
+            </div>
+
+
+            <div class="game-frame">
+                <canvas id="gameCanvas" width="360" height="500"
+                    aria-label="Move the basket with your finger to catch hearts and avoid bombs"></canvas>
+            </div>
+
+            <p class="game-tip">
+                👆 Drag your finger to move the basket
+            </p>
+
+            <!-- IN-GAME CONTROLS -->
+            <div class="game-controls">
+                <button id="pauseButton" class="pause-button">
+                    PAUSE Ⅱ
+                </button>
+
+                <button id="settingsButton" class="pause-button settings-button">
+                    ⚙ SETTINGS
+                </button>
+            </div>
+
+            <!-- PAUSE MENU -->
+            <div id="pauseOverlay" class="pause-overlay" hidden>
+                <div class="pause-card">
+                    <div class="pause-emoji">💗</div>
+                    <h2>Take a little break</h2>
+                    <p>catch your breath!</p>
+
+                    <button id="resumeButton" class="main-button">
+                        CONTINUE PLAYING ♥
+                    </button>
+
+                    <button id="pauseSettingsButton" class="secondary-button">
+                        ⚙ VOLUME SETTINGS
+                    </button>
+                </div>
+            </div>
+
+            <!-- VOLUME SETTINGS -->
+            <div id="settingsOverlay" class="settings-overlay" hidden>
+                <div class="settings-card">
+                    <div class="settings-heading">
+                        <span class="settings-icon">🎵</span>
+                        <div>
+                            <p class="eyebrow">MAKE IT YOURS</p>
+                            <h2>Volume Settings</h2>
+                        </div>
+                    </div>
+
+                    <p class="settings-description">
+                        Control every sound separately 💗
+                    </p>
+
+                    <!-- MUSIC -->
+                    <div class="volume-control">
+                        <div class="volume-label">
+                            <label for="musicVolume">🎵 Background Music</label>
+                            <span id="musicVolumeValue">60%</span>
+                        </div>
+                        <input id="musicVolume" type="range" min="0" max="100" value="60" step="5">
+                        <div class="volume-scale">
+                            <span>OFF</span>
+                            <span>MAX</span>
+                        </div>
+                    </div>
+
+                    <!-- HEART SOUND -->
+                    <div class="volume-control">
+                        <div class="volume-label">
+                            <label for="heartVolume">💗 Collect Hearts</label>
+                            <span id="heartVolumeValue">80%</span>
+                        </div>
+                        <input id="heartVolume" type="range" min="0" max="100" value="80" step="5">
+                        <div class="volume-scale">
+                            <span>OFF</span>
+                            <span>MAX</span>
+                        </div>
+                    </div>
+
+                    <!-- BOMB SOUND -->
+                    <div class="volume-control">
+                        <div class="volume-label">
+                            <label for="bombVolume">💣 Bomb Sound</label>
+                            <span id="bombVolumeValue">70%</span>
+                        </div>
+                        <input id="bombVolume" type="range" min="0" max="100" value="70" step="5">
+                        <div class="volume-scale">
+                            <span>OFF</span>
+                            <span>MAX</span>
+                        </div>
+                    </div>
+
+                    <!-- WIN SOUND -->
+                    <div class="volume-control">
+                        <div class="volume-label">
+                            <label for="winVolume">🏆 Winning Sound</label>
+                            <span id="winVolumeValue">90%</span>
+                        </div>
+                        <input id="winVolume" type="range" min="0" max="100" value="90" step="5">
+                        <div class="volume-scale">
+                            <span>OFF</span>
+                            <span>MAX</span>
+                        </div>
+                    </div>
+
+                    <!-- GAME OVER SOUND -->
+                    <div class="volume-control">
+                        <div class="volume-label">
+                            <label for="gameOverVolume">🥺 Game Over Sound</label>
+                            <span id="gameOverVolumeValue">70%</span>
+                        </div>
+                        <input id="gameOverVolume" type="range" min="0" max="100" value="70" step="5">
+                        <div class="volume-scale">
+                            <span>OFF</span>
+                            <span>MAX</span>
+                        </div>
+                    </div>
+
+                    <p class="settings-note">
+                        Set any sound to 0% to mute it.
+                    </p>
+
+                    <button id="closeSettingsButton" class="main-button">
+                        SAVE & RETURN ♥
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- END SCREEN -->
+        <section id="endScreen" class="end-screen" hidden>
+            <div id="endEmoji" class="end-emoji">💗</div>
+            <p class="eyebrow">A LITTLE MESSAGE FOR YOU</p>
+            <h2 id="endTitle">TRY AGAIN</h2>
+
+            <div class="final-score">
+                <span>YOUR SCORE</span>
+                <strong id="finalScore">0</strong>
+            </div>
+
+            <p id="endMessage" class="end-message"></p>
+
+            <button id="replayButton" class="main-button">
+                PLAY AGAIN ♥
+            </button>
+
+            <button id="homeButton" class="home-button">
+                BACK TO HOME
+            </button>
+        </section>
+
+        <footer>for nona ♡</footer>
+    </main>
+</body>
+
+</html>
